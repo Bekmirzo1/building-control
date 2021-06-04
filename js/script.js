@@ -1,7 +1,6 @@
 'use strict';
 // *ibg
 function ibg() {
-
     let ibg = document.querySelectorAll(".ibg");
     for (var i = 0; i < ibg.length; i++) {
         if (ibg[i].querySelector('img')) {
@@ -9,7 +8,6 @@ function ibg() {
         }
     }
 }
-
 ibg();
 // *Эта функция проверяет поддерживается ли браузером формат изображения webp и если поддерживается, то эта функция добавляет из css-документа внутрь html-документа класс с изобажением формата webp
 function testWebP(callback) {
@@ -49,7 +47,7 @@ if (menuLinks.length > 0) {
             // ept В условии if мы смотрим является ли menuLink.dataset.goto не false(тоесть не пустой и не со значением 0 ). Смотрим  существуют ли элементы названия классов которых внутри menuLink.dataset.goto
             if (menuLink.dataset.goto && document.querySelector(menuLink.dataset.goto)) {
                 const goToBlock = document.querySelector(menuLink.dataset.goto);
-                const goToBlockValue = goToBlock.getBoundingClientRect().top + pageYOffset - (document.querySelector('.header').offsetHeight - 0.5);
+                const goToBlockValue = goToBlock.getBoundingClientRect().top + pageYOffset - (document.querySelector('.header').offsetHeight);
                 if (iconMenu.classList.contains('_active')) {
                     iconMenu.classList.remove('_active');
                     menuBody.classList.remove('_active');
