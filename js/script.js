@@ -66,11 +66,12 @@ if (menuLinks.length > 0) {
 // *Подсветка активного пункта меню
 const blocks = document.querySelectorAll('.block');
 const scrollLinks = document.querySelectorAll('.menu__link[data-scroll]');
-window.addEventListener('scroll', () => {
+window.addEventListener('scroll', scrollColor);
+function scrollColor() {
     let current;
     for (let index = 0; index < blocks.length; index++) {
         const block = blocks[index];
-        const blockTop = block.getBoundingClientRect().top + window.pageYOffset - (document.querySelector('.header').offsetHeight + 80);
+        const blockTop = block.getBoundingClientRect().top + window.pageYOffset - (document.querySelector('.header').offsetHeight + (document.documentElement.clientHeight / 8));
         if (pageYOffset >= blockTop) {
             current = block.getAttribute('id');
         }
@@ -82,4 +83,5 @@ window.addEventListener('scroll', () => {
             scrollLink.classList.add('opened')
         }
     }
-});
+}
+scrollColor();
