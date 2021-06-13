@@ -71,7 +71,7 @@ function scrollColor() {
     let current;
     for (let index = 0; index < blocks.length; index++) {
         const block = blocks[index];
-        const blockTop = block.getBoundingClientRect().top + window.pageYOffset - (document.querySelector('.header').offsetHeight + (document.documentElement.clientHeight / 8));
+        const blockTop = block.getBoundingClientRect().top + window.pageYOffset - (document.querySelector('.header').offsetHeight + (document.documentElement.clientHeight / 7));
         if (pageYOffset >= blockTop) {
             current = block.getAttribute('id');
         }
