@@ -1470,44 +1470,6 @@ h2 {
   padding-right: 15px;
 }
 
-@media (min-width: 767.98px) {
-  .menu__list li {
-    -webkit-transition: color 0.3s ease 0s;
-    -o-transition: color 0.3s ease 0s;
-    transition: color 0.3s ease 0s;
-  }
-
-  .menu__list li:hover {
-    color: #036fc7;
-  }
-
-  .footer__network {
-    -webkit-transition: all 0.4s ease 0s;
-    -o-transition: all 0.4s ease 0s;
-    transition: all 0.4s ease 0s;
-    padding: 3px;
-  }
-
-  .footer__network:hover {
-    font-size: 200%;
-  }
-
-  .footer__network:hover::before {
-    color: #0000ff;
-  }
-}
-
-@media (min-width: 992px) {
-  .btn:hover {
-    background-color: #3a4852;
-  }
-
-  .btn_wb:hover {
-    background-color: #c4c4c4;
-    border: 1px solid #5a5a5a;
-  }
-}
-
 @media (min-width: 1115px) {
   .footer__column {
     -webkit-box-flex: 1;
@@ -2370,6 +2332,42 @@ h2 {
 @media (max-width: 319.98px) {
   .footer__columns {
     display: block;
+  }
+}
+
+@media (any-hover: hover) {
+  .menu__list li {
+    -webkit-transition: color 0.3s ease 0s;
+    -o-transition: color 0.3s ease 0s;
+    transition: color 0.3s ease 0s;
+  }
+
+  .menu__list li:hover {
+    color: #036fc7;
+  }
+
+  .btn:hover {
+    background-color: #3a4852;
+  }
+
+  .btn_wb:hover {
+    background-color: #c4c4c4;
+    border: 1px solid #5a5a5a;
+  }
+
+  .footer__network {
+    -webkit-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+    padding: 3px;
+  }
+
+  .footer__network:hover {
+    font-size: 120%;
+  }
+
+  .footer__network:hover::before {
+    color: #0000ff;
   }
 }
 
