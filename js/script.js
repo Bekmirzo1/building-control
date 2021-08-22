@@ -28,30 +28,60 @@ testWebP(function (support) {
     }
 });
 // *Burger
-let menuBody = document.querySelector('.menu__body');
-let iconMenu = document.querySelector('.icon-menu');
+const iconMenu = document.querySelector('.icon-menu');
+const menuBody = document.querySelector('.menu__body');
+function transitionEnd(e) {
+    e.addEventListener('transitionend', function () {
+        e.classList.remove('_transition')
+    });
+}
 if (iconMenu) {
     iconMenu.addEventListener('click', function () {
+        iconMenu.classList.add('_transition');
         iconMenu.classList.toggle('_active');
         menuBody.classList.toggle('_active');
         document.body.classList.toggle('_lock');
+        transitionEnd(iconMenu);
     })
 };
+const menuMedia = window.matchMedia('(max-width: 1068px) and (min-width: 767.98px)');
+document.addEventListener('click', function (e) {
+    const target = e.target;
+    if (document.querySelector('.icon-menu._active') && !target.closest('.menu')) {
+        iconMenu.classList.add('_transition');
+        iconMenu.classList.remove('_active');
+        menuBody.classList.remove('_active');
+        document.body.classList.remove('_lock');
+        transitionEnd(iconMenu);
+    }
+});
+
 // *Прокрутка при клике
 const menuLinks = document.querySelectorAll('.menu__link[data-goto]');
+let view = 10;
+function viewValue(e) {
+    if (e.matches) {
+        view = 4;
+    }
+}
+
+const heightMedia = window.matchMedia('(max-height: 520px)');
+heightMedia.addListener(viewValue);
+viewValue(heightMedia);
 if (menuLinks.length > 0) {
     for (let index = 0; index < menuLinks.length; index++) {
         const menuLink = menuLinks[index];
         menuLink.addEventListener('click', function (e) {
             const menuLink = e.target;
-            // ept В условии if мы смотрим является ли menuLink.dataset.goto не false(тоесть не пустой и не со значением 0 ). Смотрим  существуют ли элементы названия классов которых внутри menuLink.dataset.goto
             if (menuLink.dataset.goto && document.querySelector(menuLink.dataset.goto)) {
                 const goToBlock = document.querySelector(menuLink.dataset.goto);
-                const goToBlockValue = goToBlock.getBoundingClientRect().top + pageYOffset - (document.querySelector('.header').offsetHeight);
-                if (iconMenu.classList.contains('_active')) {
+                let goToBlockValue = goToBlock.getBoundingClientRect().top + pageYOffset - (document.querySelector('.header').offsetHeight) - (document.documentElement.clientHeight / view);
+                if (iconMenu.classList.contains('_active') && !menuMedia.matches) {
+                    iconMenu.classList.add('_transition');
                     iconMenu.classList.remove('_active');
                     menuBody.classList.remove('_active');
                     document.body.classList.remove('_lock');
+                    transitionEnd(iconMenu);
                 }
                 window.scrollTo({
                     top: goToBlockValue,
@@ -71,7 +101,7 @@ function scrollColor() {
     let current;
     for (let index = 0; index < blocks.length; index++) {
         const block = blocks[index];
-        const blockTop = block.getBoundingClientRect().top + window.pageYOffset - (document.querySelector('.header').offsetHeight + (document.documentElement.clientHeight / 7));
+        let blockTop = block.getBoundingClientRect().top + pageYOffset - (document.querySelector('.header').offsetHeight + (document.documentElement.clientHeight / (view - 0.2)));
         if (pageYOffset >= blockTop) {
             current = block.getAttribute('id');
         }
