@@ -75,7 +75,6 @@ if (menuLinks.length > 0) {
             const menuLink = e.target;
             if (menuLink.dataset.goto && document.querySelector(menuLink.dataset.goto)) {
                 const goToBlock = document.querySelector(menuLink.dataset.goto);
-                let goToBlockValue = goToBlock.getBoundingClientRect().top + pageYOffset - (document.querySelector('.header').offsetHeight) - (document.documentElement.clientHeight / view);
                 if (iconMenu.classList.contains('_active') && !menuMedia.matches) {
                     iconMenu.classList.add('_transition');
                     iconMenu.classList.remove('_active');
@@ -83,10 +82,12 @@ if (menuLinks.length > 0) {
                     document.body.classList.remove('_lock');
                     transitionEnd(iconMenu);
                 }
-                window.scrollTo({
-                    top: goToBlockValue,
-                    behavior: "smooth"
+                const moveTo = new MoveTo({
+                    tolerance: (document.querySelector('.header').offsetHeight) + (document.documentElement.clientHeight / view) ,
+                    duration: 800,
+                    easing: 'easeOutQuart'
                 });
+                moveTo.move(goToBlock);
                 e.preventDefault();
             }
         });
